@@ -1,0 +1,17 @@
+[project]
+name = "xobis"
+version = "0.1.0"
+description = "Experiments with the OBIS dataset"
+readme = "README.md"
+authors = [
+    { name = "Carsten Senger", email = "senger@rehfisch.de" }
+]
+requires-python = ">=3.14"
+dependencies = []
+
+[project.scripts]
+xobis = "xobis:main"
+
+[build-system]
+requires = ["uv_build>=0.13.7,<0.14.0"]
+build-backend = "uv_build"
