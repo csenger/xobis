@@ -9,10 +9,12 @@ authors = [
 requires-python = ">=3.14"
 dependencies = [
     "duckdb>=2.0.0",
+    "ipython>=9.18.1",
 ]
 
 [project.scripts]
 xobis = "xobis:main"
+obis-repl = "xobis:ipython_repl"
 
 [build-system]
 requires = ["uv_build>=0.13.7,<0.14.0"]
