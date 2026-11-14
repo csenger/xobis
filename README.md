@@ -6,7 +6,7 @@ https://github.com/iobis/obis-open-data
 
 ## uv / Python / steam-run
 
-You need to have `uv` and a recent Python version installed, test with 3.14.10. `steam-run` is only required on NixOS to have required shared libraries available.
+You need to have `uv` and a recent Python version installed, tested with 3.14.10. `steam-run` is only required on NixOS to have required shared libraries available.
 
 ## OBIS data
 
