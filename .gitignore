@@ -6,5 +6,8 @@ dist/
 wheels/
 *.egg-info
 
+# File for the OBIS data
+/obis-open-data/*
+
 # Virtual environments
 .venv

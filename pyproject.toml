@@ -7,7 +7,9 @@ authors = [
     { name = "Carsten Senger", email = "senger@rehfisch.de" }
 ]
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "duckdb>=2.0.0",
+]
 
 [project.scripts]
 xobis = "xobis:main"
@@ -15,3 +17,8 @@ xobis = "xobis:main"
 [build-system]
 requires = ["uv_build>=0.13.7,<0.14.0"]
 build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]
