@@ -9,5 +9,7 @@ wheels/
 # File for the OBIS data
 /obis-open-data/*
 
+.repl_history.sqlite
+
 # Virtual environments
 .venv
