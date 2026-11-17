@@ -13,9 +13,11 @@ DEMO_QUERY = """
     and dropped is not true and absence is not true;
 """
 
+ALL_QUERY = "select * from obis"
+
 
 def test_source_column_names(connection):
-    columns = connection.query("select * from obis").columns
+    columns = connection.query(ALL_QUERY).columns
     expected = sorted(
         [
             "_id",
@@ -36,6 +38,22 @@ def test_source_column_names(connection):
         ]
     )
     assert sorted(columns) == expected
+
+
+def test_source_column_types(connection):
+    rel = connection.query(ALL_QUERY)
+    columns = rel.columns
+    dtypes = rel.dtypes
+    by_name = dict(zip(columns, dtypes))
+
+    print(type(by_name["_id"]))
+    assert sorted(
+        [name for (name, type_) in by_name.items() if type_.id == "struct"]
+    ) == [
+        "extensions",
+        "interpreted",
+        "source",
+    ]
 
 
 def test_demo_query_column_names(connection):
@@ -176,14 +194,9 @@ def test_demo_query_column_types(connection):
     dtypes = connection.query(DEMO_QUERY).dtypes
     by_name = dict(zip(columns, dtypes))
 
-    T_VARCHAR = "VARCHAR"
-    T_BIGINT = "BIGINT"
-    T_DOUBLE = "DOUBLE"
-    T_BOOLEAN = "BOOLEAN"
-
-    assert by_name["id"] == T_VARCHAR
-    assert by_name["dataset_id"] == T_VARCHAR
-    assert by_name["species"] == T_VARCHAR
-    assert by_name["decimalLatitude"] == T_DOUBLE
-    assert by_name["date_start"] == T_BIGINT
-    assert by_name["dropped"] == T_BOOLEAN
+    assert by_name["id"].id == "varchar"
+    assert by_name["dataset_id"].id == "varchar"
+    assert by_name["species"].id == "varchar"
+    assert by_name["decimalLatitude"].id == "double"
+    assert by_name["date_start"].id == "bigint"
+    assert by_name["dropped"].id == "boolean"
