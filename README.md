@@ -2,6 +2,8 @@
 
 https://github.com/iobis/obis-open-data
 
+Using DuckDB 2.0
+
 # Prerequisits
 
 ## uv / Python / steam-run
@@ -37,6 +39,11 @@ steam-run uv run pytest
 
 # Notes
 
+* DuckDB docs: https://duckdb.org/docs/2.0/
+* OBIS: https://obis.org/
+* OBIS Manual: https://manual.obis.org/
+* OBIS Github: https://github.com/iobis
+
 ## OBIS Datastructures
 
 DuckDB has [2 types of datatypes](https://duckdb.org/docs/2.0/sql/data_types/overview), general-purpose data types (e.g. VARCHAR, INTEGER, BIGINT, GEOMETRY) and nested / composite types (ARRAY, LIST, MAP, STRUCT, TUPLE, and UNION). 
@@ -63,8 +70,13 @@ Nested structs:
  * interpreted: STRUCT
  * extensions: STRUCT
  
+## Geographic coordinates / Geometry in DuckDB/OBIS
 
-
+* DuckDB has the general purpose type GEOMETRY. OBIS has the column geometry (GEOMETRY('OGC:CRS84'))
+* OBIS also has decimalLatitude/decimalLongitude
+* [h3](https://duckdb.org/community_extensions/extensions/h3) is a community duckdb extension that provides a
+  hierarchical hexagonal indexing for geospatial data. There is a [h3 python package](https://pypi.org/project/h3/).
+  It is used by the [OBIS Project spacegrids](https://github.com/iobis/speciesgrids/blob/main/speciesgrids/db.py).
 
 ## DUCKDB Performance
 
@@ -146,3 +158,7 @@ Zone map indexs are most effective on (semi) ordered columns. Ordering can also 
 ART (Adaptive Radix Tree) indexes are created implicitly (PRIMARY KEY/FOREIGN KEY/UNIQUE) or with `CREATE INDEX`. If an ART index is loaded into memory this memory will not be freed, it needs `DETACH`/`ATTACH`.
 
 There is `EXPLAIN ANALYZE`.
+
+## Helpers:
+
+* https://wktmap.com/ 
